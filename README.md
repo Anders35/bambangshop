@@ -97,3 +97,17 @@ Features I find useful:
 - Environment Management
 
 #### Reflection Publisher-3
+
+1. We are using the Push Model. The `notify` method pushes data directly to each `Subscriber` by calling the `update` method on each `subscriber` and immediately sending the notification payload through an HTTP request using the `REQWEST_CLIENT`.
+
+2. 
+    Advantages:
+    - Subscribers have more control over when and how they fetch the data, avoiding unnecessary updates if the data is not needed immediately.
+    - It can reduce payload size in the notification requests since only the notification of the event itself is communicated.
+
+    Disadvantages:
+    - Subscribers must implement logic to fetch the relevant data which requires them to know how to query the publisher.
+    - Subscribers must make additional requests to the publisher which introduces delays compared to the Push Model where the data is delivered immediately.
+    - Risk of inconsistency if the data changes between the notification and the subscriber's fetch.
+
+3. If we removed multi-threading from the notification process, the program would send notifications to subscribers synchronously. This means the main thread would process each subscriber's notification before moving to the next one which would caused signigicant delays.
