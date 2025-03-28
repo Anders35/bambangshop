@@ -78,6 +78,12 @@ This is the place for you to write reflections:
 
 #### Reflection Publisher-1
 
+1. Based on my understanding, an interface is beneficial for flexibility and scalability. In a regular Observer pattern, the `Subscriber` is often an interface so that different types of subscribers can implement their own behavior for handling updates. However, if all subscribers have the same structure and behavior, a single Subscriber struct is enough.
+
+2. A `Vec` (list) could work if the primary operation was appending subscribers or iterating over all of them. However, since we require frequent lookups and deletions based on the `url`, a `Vec` would be inefficient. On the other hand, a `DashMap` provides O(1) average-time complexity for these operations, making it a more appropriate choice for managing a list of `Subscribers`.
+
+3. The Singleton pattern ensures that there is only one instance of a resource shared across the application. The `SUBSCRIBERS` static variable implemented with `lazy_static!` essentially behaves like a Singleton already, ensuring centralized access to the subscribers' data. However, the unique feature of `DashMap` is that it provides built-in thread safety which is critical in Rust when data is shared across threads.
+
 #### Reflection Publisher-2
 
 #### Reflection Publisher-3
