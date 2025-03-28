@@ -86,4 +86,14 @@ This is the place for you to write reflections:
 
 #### Reflection Publisher-2
 
+1. Separating `Service` and `Repository` from the `Model` in the MVC pattern established design principles like the Single Responsibility Principle and Separation of Concerns. The `Model` inherently handles both business logic and data storage in the MVC architecture, but combining these two responsibilities into one leads to a system that's harder to maintain, test, and scale. By introducing a `Service` layer, the business logic is encapsulated separately, making it easier to adapt workflows and transaction handling without impacting data representation or storage. Similarly, the `Repository` layer abstracts the data access logic, isolating it from business logic.
+
+2. If we only use the Model without separating these layers, the interactions between models like `Program`, `Subscriber`, and `Notification` would become intertwined. If each model directly accesses the database and manages its own business logic, it would lead to duplicated code and conflicts in how each model handles shared data or dependencies. This complexity makes debugging and testing difficult because changing something in one model can inadvertently break another. 
+
+3. Regarding Postman, I’ve explored it and it's really helpful in testing APIs in real-time. I use Postman to send HTTP requests to endpoints like the ones defined in the `Notification` controller. It allows me to test functionality, validate responses, and debug issues without needing to open the browser directly. 
+
+Features I find useful: 
+- Collection Runner
+- Environment Management
+
 #### Reflection Publisher-3
